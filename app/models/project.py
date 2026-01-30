@@ -4,9 +4,6 @@ from app.database.base import Base
 from datetime import datetime
 from sqlalchemy import DateTime
 from sqlalchemy.orm import relationship
-
-owner = relationship("User", back_populates="projects")
-tasks = relationship("Task", back_populates="project")
 #relacionamento de campos user>project>task
 
 class Project(Base):
