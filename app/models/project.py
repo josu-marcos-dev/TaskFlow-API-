@@ -17,6 +17,8 @@ class Project(Base):
     owner_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
     description: Mapped[str] = mapped_column(String)
 
+    owner = relationship("User", back_populates="projects")
+
     tasks = relationship(
         "Task",
         back_populates="project",
