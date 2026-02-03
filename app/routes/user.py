@@ -67,7 +67,7 @@ def modify_user(
     
     existing_user = (
         db.query(User)
-        .filter(User.user_id == current_user.id)
+        .filter(User.id == current_user.id)
         .first()
     )
 
@@ -98,7 +98,7 @@ def delete_user(
     
     existing_user = (
         db.query(User)
-        .filter(User.user_id == current_user.id)
+        .filter(User.id == current_user.id)
         .first()
     )
 
