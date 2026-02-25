@@ -47,7 +47,6 @@ def create_project(user_id: int,
     db.refresh(new_project)
 
     return new_project
-#ver se os campos de criação estão corretos com base no schemas (gpto)
 
 
 

@@ -17,7 +17,7 @@ class UpdateTask(BaseModel):
     priority: Optional[int] = None
     status: Optional[str] = None
 class ResponseTask(TaskBase):
-    task_id: int
+    id: int
     project_id: int
     creation_date: datetime 
     model_config = {"from_attributes": True}

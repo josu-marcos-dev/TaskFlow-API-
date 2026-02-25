@@ -4,7 +4,8 @@ from app.database.base import Base
 from datetime import datetime
 from sqlalchemy import DateTime
 from sqlalchemy.orm import relationship
-#relacionamento de campos user>project>task
+
+#relacionamento de campos user->project->task ocorre atravéz do relationship
 
 class Project(Base):
     __tablename__ = "projects"

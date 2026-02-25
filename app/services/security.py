@@ -5,6 +5,8 @@ from fastapi.security import OAuth2PasswordBearer
 from app.database.session import get_db
 from app.models.user import User
 from sqlalchemy.orm import Session
+from passlib.context import CryptContext
+
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/auth/login")
 
@@ -16,8 +18,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 30
 def create_access_token(data: dict): 
 #ela vai recebr data que vai ser um dicionário
 
-    to_encode = data.copy() 
-    #vai usar copy() para gerar uma copia do data e colocar em to_encode
+    to_encode = data.copy() #vai usar copy() para gerar uma copia do data e colocar em to_encode
 
     expire = datetime.utcnow() + timedelta(minutes = ACCESS_TOKEN_EXPIRE_MINUTES)
     #estamos criando o tempo de validade do token, que vai ser o horário atual + access_token_expire_time
@@ -63,3 +64,12 @@ def get_current_user(token: str = Depends(oauth2_scheme),
         raise HTTPException(status_code=401)
 
     return user #entender melhor depois 
+
+
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+def hash_password(password: str):
+    return pwd_context.hash(password)
+
+def verify_password(plain_password: str, hashed_password: str):
+    return pwd_context.verify(plain_password, hashed_password)

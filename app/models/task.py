@@ -9,7 +9,7 @@ from sqlalchemy.orm import relationship
 class Task(Base):
     __tablename__ = "tasks"
 
-    id: Mapped[int] = mapped_column(primary_key=True) #primary_key é gerado automaticamnete
+    id: Mapped[int] = mapped_column(primary_key=True) #primary_key é quando o valor é gerado automaticamnete
     title: Mapped[str] = mapped_column(String,  
                                        index=True)
     description: Mapped[str] = mapped_column(String)

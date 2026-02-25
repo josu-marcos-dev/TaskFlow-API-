@@ -15,11 +15,11 @@ class UpdateProject(BaseModel):
     description: Optional[str] = None
 
 class ResponseProject(ProjectBase):
-    project_id: int
+    id: int
     owner_id: int
     creation_date: datetime
 
     model_config = {"from_attributes": True}
 
-#o pydantic serve para vc padronizar a entrada dos usuários, as responses da sua api, gerar mensagens de erro, criar jsons e muito mais
+#o pydantic serve para padronizar a entrada dos usuários, as responses da sua api, gerar mensagens de erro, criar jsons e muito mais
 #basemodel e bem poderoso

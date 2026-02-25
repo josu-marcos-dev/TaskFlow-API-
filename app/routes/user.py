@@ -4,9 +4,7 @@ from app.services.security import get_current_user
 from sqlalchemy.orm import Session
 from app.database.session import get_db
 from app.models.user import User
-
-#ta, entendi, e como ficaria em user? para user, o post n precisa de auth, pq a criação de usuários deve ser livre! mas o get, get all, delete e pu devem ser protegidos! como fica essa proteção?
-
+from app.services.security import hash_password
 
 router = APIRouter(prefix="/users", tags=["Users"])
 
@@ -27,7 +25,7 @@ def create_user(
         .first()
     )
 
-    if existing_user: #se a query estiver correta, manda erro, se não, prossegue!
+    if existing_user: 
         raise HTTPException(
             status_code=409,
             detail="User already exists"
@@ -36,7 +34,7 @@ def create_user(
     new_user = User(
         username=user.username,
         email=user.email,
-        password=user.password
+        password=hash_password(user.password)
     )
 
     db.add(new_user)
@@ -56,7 +54,7 @@ def get_me(
 
 
 @router.put("/me",
-            response_model=UpdateUser,
+            response_model=ResponseUser,
             status_code=200
             )
 def modify_user(
@@ -79,7 +77,7 @@ def modify_user(
 
     existing_user.username = user.username
     existing_user.email = user.email
-    existing_user.password = user.password
+    existing_user.password = hash_password(user.password)
 
     db.commit()
     db.refresh(existing_user)

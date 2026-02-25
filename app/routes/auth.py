@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, Depends, status
 from app.schemas.auth import AuthResponse, AuthLogin
-from app.services.security import create_access_token
+from app.services.security import create_access_token, hash_password, verify_password
 from fastapi.security import OAuth2PasswordRequestForm #nisso aqui tb
 from sqlalchemy.orm import Session
 from app.database.session import get_db
@@ -19,8 +19,8 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(),
         .first()
     )
 
-    if not user or user.password != form_data.password: #o ideal era user hash que transforma senha em string irreversível
-        #porém como ainda estou aprendendo, vou me ater a simplicidade! 
+    if not user or not verify_password(form_data.password, user.password): 
+        
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid credentials"

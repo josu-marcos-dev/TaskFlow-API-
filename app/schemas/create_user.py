@@ -19,5 +19,5 @@ class ResponseUser(UserBase):
     creation_date: datetime
     model_config = {"from_attributes": True}
 
-#schemas vão ser resposáveis por criar o user p vc, o route so conecta as coisas, 
+#schemas vão ser resposáveis por criar o user para você, a rota so conecta as coisas, 
 #quando o cliente mandar uma solicitação de post, ele manda as infos e o schema padroniza e responde! 

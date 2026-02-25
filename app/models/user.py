@@ -8,10 +8,10 @@ from sqlalchemy.orm import relationship
 class User(Base):
     __tablename__ = "users"
 
-    id: Mapped[int] = mapped_column(primary_key=True) #primery_key = identificador único
+    id: Mapped[int] = mapped_column(primary_key=True) #primery_key = é um identificador único
     email: Mapped[str] = mapped_column(String, 
                                        unique=True, 
-                                       index=True)  #coloca sempre q campo e muito solicitado e curto
+                                       index=True)  #index se coloca sempre que o campo e muito solicitado e curto
     password: Mapped[str]
     username: Mapped[str] = mapped_column(String,
                                           unique=True,

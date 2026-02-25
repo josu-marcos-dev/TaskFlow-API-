@@ -1,6 +1,4 @@
 from sqlalchemy.orm import DeclarativeBase
 
-class Base(DeclarativeBase):
+class Base(DeclarativeBase): #base para o banco de dados
     pass
-
-#tudo que for virar tabea vai herdar essa base, é como um molde!
